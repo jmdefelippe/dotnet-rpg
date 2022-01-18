@@ -10,7 +10,7 @@ using dotnet_rpg.Data;
 namespace dotnet_rpg.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211227190731_UserCharacterRelationship")]
+    [Migration("20210121054232_UserCharacterRelationship")]
     partial class UserCharacterRelationship
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,11 +63,11 @@ namespace dotnet_rpg.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<byte>("PasswordHash")
-                        .HasColumnType("tinyint");
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<byte>("PasswordSalt")
-                        .HasColumnType("tinyint");
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");

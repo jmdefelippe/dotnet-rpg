@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using dotnet_rpg.Data;
+using dotnet_rpg.Dtos.User;
 using dotnet_rpg.Models;
 using Microsoft.AspNetCore.Mvc;
-using dotnet_rpg.Dtos.User;
 
 namespace dotnet_rpg.Controllers
 {
@@ -11,9 +11,10 @@ namespace dotnet_rpg.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepo;
-        public AuthController (IAuthRepository authRepo)
+        public AuthController(IAuthRepository authRepo)
         {
             _authRepo = authRepo;
+
         }
 
         [HttpPost("Register")]
@@ -23,7 +24,7 @@ namespace dotnet_rpg.Controllers
                 new User { Username = request.Username }, request.Password
             );
 
-            if (!response.Success)
+            if(!response.Success)
             {
                 return BadRequest(response);
             }
@@ -32,13 +33,13 @@ namespace dotnet_rpg.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<ServiceResponse<string>>> Login(UserRegisterDto request)
+        public async Task<ActionResult<ServiceResponse<string>>> Login(UserLoginDto request)
         {
             var response = await _authRepo.Login(
                 request.Username, request.Password
             );
 
-            if (!response.Success)
+            if(!response.Success)
             {
                 return BadRequest(response);
             }
